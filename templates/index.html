@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        #cat-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cat Generator</h1>
+    <button id="generate-cat">Generate Cat</button>
+    <img id="cat-image" src="" alt="Cat image will appear here" style="display: none;">
+
+    <script>
+        document.getElementById('generate-cat').addEventListener('click', function() {
+            fetch('/get-cat')
+                .then(response => response.json())
+                .then(data => {
+                    const catImage = document.getElementById('cat-image');
+                    catImage.src = data.cat_url;
+                    catImage.style.display = 'block';
+                });
+        });
+    </script>
+</body>
+</html>
